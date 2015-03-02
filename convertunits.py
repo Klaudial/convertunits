@@ -6,8 +6,9 @@ class length(object)
         
         if type(lead)==type(self):
 ...             # Copy constructor
-...             self.data=dict(lead.data)
-...             self.coefficient=lead.coefficient
+...             self.Number=dict(int(filter(str.isdigit, args)).data)
+...             self.unit=int(filter(str.isalpha, args)).coefficient
+
 
 
 
@@ -22,15 +23,15 @@ class length(object)
 ...         # Convert non metres to metres - except it doesn't, 'cos if you start in not metres, it doesn't work
 ...         others=map(units,others)
 ...         for another in others:
-...             for unit, number in another.data.iteritems():
+...             for unit, numbers in another.data.iteritems():
 ...                 if unit in result_data:
-...                     result_data[number]+=another.data[number]
+...                     result_data[numbers]+=another.data[numbers]
 ...                 elif unit == "km":
-...                     result_data[number]+= 1000*another.data[number]
+...                     result_data[numbers]+= 1000*another.data[numbers]
 ...                 elif unit == "cm":
-                        result_data[number]+=another.data[number]/100
+                        result_data[numbers]+=another.data[numbers]/100
                     else:
-                        raise error "Please use a metric length with units m, cm or km!"
+                        raise TypeError("Please use a metric length with units m, cm or km!")
 ...         return units(result_data,result_unit)
 
         def __add__(self, other):
